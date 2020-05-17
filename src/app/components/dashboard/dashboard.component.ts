@@ -20,19 +20,4 @@ export class DashboardComponent implements OnInit {
   public ledSwitch() {
     this.led = this.switchService.ledSwitch();
   }
-
-  // public ledSwitch() {
-  //   let gpioSwitch: string;
-
-  //   this.store.select('SendMessage')
-  //     .subscribe(state => (gpioSwitch = state.message)
-  //   );
-  //   console.log('GPIO SWITCH: ', gpioSwitch);
-  //   gpioSwitch === 'off' ? gpioSwitch = 'on' : gpioSwitch = 'off';
-
-  //   this.store.dispatch(new gpioActions.SendMessage(gpioSwitch));
-
-  //   console.log(`turn ${gpioSwitch} led!`);
-  //   this.led = gpioSwitch;
-  // }
 }

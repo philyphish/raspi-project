@@ -24,14 +24,12 @@ app.get('/*', (req, res) =>
 res.sendFile(indexFilePath, { root: './' },)
 );
 
-// app.use('/raspi/gpio', (req, res) => {
-  const wss = new WebSocket.Server({ server: server, path: '/raspi/gpio' });
-
+const wss = new WebSocket.Server({ server: server, path: '/raspi/gpio' });
   wss.on('connection', (ws: WebSocket) => {
     ws.on('message', (message: string) => {
       console.log('recieved: %s', message);
 
-      ws.send(`Hello, you sent ${message}`);
+      ws.send(message);
       // wss.clients
       // .forEach(client => {
       //   if(client != ws) {
@@ -39,9 +37,8 @@ res.sendFile(indexFilePath, { root: './' },)
       //   }
       // }); 
     });
-    ws.send("Hello from ws server!")
+    ws.send('{"message":"Hello from ws server!"}');
   });
-// });
 
 server.listen(port, () => {
     console.log('Listening on port ' + port);
