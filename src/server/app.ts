@@ -27,11 +27,11 @@ app.get('/*', (req, res) =>
 res.sendFile(indexFilePath, { root: './' },)
 );
 
-gpio.setup(pin, gpio.DIR_HIGH, write);
+gpio.setup(17, gpio.DIR_HIGH);
 
 function write(err){
   if(err) throw err;
-  gpio.write(pin, false, (err)=> {
+  gpio.write(17, false, function(err) {
     if(err) throw err;
     console.log(`Write to Pin ${pin}`);
   });
