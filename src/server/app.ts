@@ -5,6 +5,8 @@ import * as cookieParser from 'cookie-parser';
 import * as logger from 'morgan';
 import * as http from 'http';
 import * as WebSocket from 'ws';
+import * as gpio from 'rpi-gpio';
+import * as log4js from 'log4js';
 
 const app = express();
 const port = 3000;
@@ -23,6 +25,17 @@ app.use(express.static(clientPath));
 app.get('/*', (req, res) => 
 res.sendFile(indexFilePath, { root: './' },)
 );
+
+gpio.setup(7, gpio.DIR_HIGH, write);
+
+function write(err){
+  if(err) throw err;
+  gpio.write(7, false, (err)=> {
+    if(err) throw err;
+    console.log('Write to Pin');
+    
+  });
+};
 
 const wss = new WebSocket.Server({ server: server, path: '/raspi/gpio' });
   wss.on('connection', (ws: WebSocket) => {
