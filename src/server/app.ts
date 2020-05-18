@@ -27,16 +27,16 @@ app.get('/*', (req, res) =>
 res.sendFile(indexFilePath, { root: './' },)
 );
 
+gpio.setup(pin, gpio.DIR_HIGH, write);
 
 function write(err){
   if(err) throw err;
-  gpio.write(pin, true, (err)=> {
+  gpio.write(pin, false, (err)=> {
     if(err) throw err;
     console.log(`Write to Pin ${pin}`);
   });
 };
 
-gpio.setup(pin, gpio.DIR_HIGH, write);
 
 const wss = new WebSocket.Server({ server: server, path: '/raspi/gpio' });
 wss.on('connection', (ws: WebSocket) => {
