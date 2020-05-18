@@ -28,11 +28,11 @@ res.sendFile(indexFilePath, { root: './' },)
 
 
 let pin = 17;
-gpio.setup(pin, gpio.DIR_HIGH, write);
+
 
 function write(err){
   if(err) throw err;
-  gpio.write(pin, false, (err)=> {
+  gpio.write(pin, true, (err)=> {
     if(err) throw err;
     console.log(`Write to Pin ${pin}`);
   });
@@ -44,7 +44,7 @@ const wss = new WebSocket.Server({ server: server, path: '/raspi/gpio' });
     ws.on('message', (message: string) => {
       console.log('recieved: %s', message);
       let messageJSON = JSON.parse(message); 
-      messageJSON.message === 'on' ? console.log('This is on') : console.log('this is off');
+      messageJSON.message === 'on' ? gpio.setup(pin, gpio.DIR_HIGH, write) : console.log('this is off');
       
       ws.send(message);
       // wss.clients
