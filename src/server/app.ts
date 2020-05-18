@@ -27,6 +27,8 @@ app.get('/*', (req, res) =>
 res.sendFile(indexFilePath, { root: './' },)
 );
 
+gpio.setup(pin, gpio.DIR_HIGH, write);
+
 function write(err){
   if(err) throw err;
   gpio.write(pin, true, (err)=> {
