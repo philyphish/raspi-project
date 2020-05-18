@@ -13,6 +13,7 @@ const port = 3000;
 const clientPath = 'dist/src/client';
 const indexFilePath = path.join(clientPath, 'index.html');
 const server = http.createServer(app);
+const pin = 17;
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -27,7 +28,6 @@ res.sendFile(indexFilePath, { root: './' },)
 );
 
 
-let pin = 17;
 
 
 function write(err){
