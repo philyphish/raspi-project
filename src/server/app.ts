@@ -10,7 +10,7 @@ import * as log4js from 'log4js';
 
 const app = express();
 const port = 3000;
-const clientPath = 'dist/src/client';
+const clientPath = '../dist/src/client';
 const indexFilePath = path.join(clientPath, 'index.html');
 const server = http.createServer(app);
 
@@ -26,11 +26,11 @@ app.get('/*', (req, res) =>
 res.sendFile(indexFilePath, { root: './' },)
 );
 
-gpio.setup(7, gpio.DIR_HIGH, write);
+gpio.setup(17, gpio.DIR_HIGH, write);
 
 function write(err){
   if(err) throw err;
-  gpio.write(7, false, (err)=> {
+  gpio.write(17, false, (err)=> {
     if(err) throw err;
     console.log('Write to Pin');
     
