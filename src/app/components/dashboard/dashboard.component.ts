@@ -15,6 +15,8 @@ export class DashboardComponent implements OnInit {
   constructor(private store: Store<any>, private switchService: SwitchService) { }
 
   ngOnInit() {
+    console.log(window.location.href);
+    
   }
 
   public ledSwitch() {
