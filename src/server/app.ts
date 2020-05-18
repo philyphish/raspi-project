@@ -27,7 +27,13 @@ app.get('/*', (req, res) =>
 res.sendFile(indexFilePath, { root: './' },)
 );
 
-
+function write(err){
+  if(err) throw err;
+  gpio.write(pin, true, (err)=> {
+    if(err) throw err;
+    console.log(`Write to Pin ${pin}`);
+  });
+};
 
 
 const wss = new WebSocket.Server({ server: server, path: '/raspi/gpio' });
@@ -48,13 +54,7 @@ wss.on('connection', (ws: WebSocket) => {
       ws.send('{"message":"Hello from ws server!"}');
     });
     
-    function write(err){
-      if(err) throw err;
-      gpio.write(pin, true, (err)=> {
-        if(err) throw err;
-        console.log(`Write to Pin ${pin}`);
-      });
-    };
+    
 server.listen(port, () => {
     console.log('Listening on port ' + port);
   });
