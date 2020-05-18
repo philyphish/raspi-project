@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "client:build": "cd src && ng build --watch",
-    "start:server": "tsc && node dist/src/server/app.js"
+    "start:server": "tsc  &&  node dist/src/server/app.js"
   },
   "private": true,
   "dependencies": {
