@@ -55,7 +55,7 @@ wss.on('connection', (ws: WebSocket) => {
   ws.on('message', (message: string) => {
     console.log('recieved: %s', message);
     let messageJSON = JSON.parse(message); 
-    messageJSON.message === 'on' ? gpio.write(pin, true, write) : gpio.write(pin, false, write);;
+    messageJSON.message === 'on' ? gpio.write(pin, true) : gpio.write(pin, false, write);;
     
     ws.send(message);
     // wss.clients
