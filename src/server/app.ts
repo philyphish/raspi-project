@@ -40,7 +40,7 @@ res.sendFile(indexFilePath, { root: './' },)
   
   
   gpio.setup(pin, gpio.DIR_HIGH, write);
-  gpio.setup(pin, gpio.DIR_IN, readInput);
+  // gpio.setup(pin, gpio.DIR_IN, readInput);
   
   function write(err){
     if(err) throw err;
@@ -50,9 +50,6 @@ res.sendFile(indexFilePath, { root: './' },)
     });
   };
   
-
-
-
 const wss = new WebSocket.Server({ server: server, path: '/raspi/gpio' });
 wss.on('connection', (ws: WebSocket) => {
   ws.on('message', (message: string) => {
