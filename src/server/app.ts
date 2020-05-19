@@ -30,7 +30,9 @@ res.sendFile(indexFilePath, { root: './' },)
 gpio.setup(pin, gpio.DIR_HIGH, write);
 
 let stateOfGpio = (pinNumber: number) => {
-  return gpio.read(pin);
+  return gpio.read(pin, (res) => {
+    console.log(res);
+  });
 }
 
 function write(err){
