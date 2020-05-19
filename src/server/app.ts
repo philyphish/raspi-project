@@ -29,9 +29,19 @@ res.sendFile(indexFilePath, { root: './' },)
 
 gpio.setup(pin, gpio.DIR_HIGH, write);
 
-let stateOfGpio = (pinNumber: number) => {
-  return gpio.read(pin, write);
+let readGpio = () => {
+  gpio.setup(pin, gpio.DIR_IN, readInput);
+
+  function readInput(err) {
+    if (err) throw err;
+    gpio.read(pin, function(err, value){
+      if(err) throw err;
+      console.log(`Pin ${pin} value is ${value}`); 
+      return value;   
+    });
+  }
 }
+
 
 function write(err){
   if(err) throw err;
@@ -57,7 +67,8 @@ wss.on('connection', (ws: WebSocket) => {
         //   }
         // }); 
       });
-      ws.send(`{"message":"State of GPIO "${pin}: ${stateOfGpio(pin)}}`);
+
+      ws.send(`{"message":"State of GPIO "${pin}: ${readGpio}`);
     });
     
     
