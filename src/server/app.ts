@@ -70,7 +70,7 @@ wss.on('connection', (ws: WebSocket) => {
         // }); 
       });
 
-      ws.send(`{"message":"State of GPIO "${pin} is ${readGpio}`);
+      ws.send(`{"message":"State of GPIO "${pin} is ${readGpio()}`);
     });
     
     
