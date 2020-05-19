@@ -40,7 +40,7 @@ res.sendFile(indexFilePath, { root: './' },)
   
   
   gpio.setup(pin, gpio.DIR_HIGH, write);
-  gpio.setup(pin, gpio.DIR_IN, readInput);
+  // gpio.setup(pin, gpio.DIR_IN, readInput);
   
   function write(err){
     if(err) throw err;
