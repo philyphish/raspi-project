@@ -41,8 +41,8 @@ let readGpio = () => {
   }
 }
 
+gpio.setup(pin, gpio.DIR_HIGH, write);
 let writeGpio = (value) => {
-  gpio.setup(pin, gpio.DIR_HIGH, write);
   function write(err){
     if(err) throw err;
     gpio.write(pin, false, function(err) {
