@@ -29,6 +29,10 @@ res.sendFile(indexFilePath, { root: './' },)
 
 gpio.setup(pin, gpio.DIR_HIGH, write);
 
+let stateOfGpio = (pinNumber: number) => {
+  return gpio.read(pin);
+}
+
 function write(err){
   if(err) throw err;
   gpio.write(pin, false, function(err) {
@@ -53,7 +57,7 @@ wss.on('connection', (ws: WebSocket) => {
         //   }
         // }); 
       });
-      ws.send('{"message":"Hello from ws server!"}');
+      ws.send(`{"message":"State of GPIO "${pin}: ${stateOfGpio(pin)}}`);
     });
     
     
