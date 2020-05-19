@@ -41,18 +41,16 @@ let readGpio = () => {
   }
 }
 
-let writeGpio = (value) => {
   gpio.setup(pin, gpio.DIR_HIGH, write);
-  
+
   function write(err){
     if(err) throw err;
-    gpio.write(pin, value, function(err) {
+    gpio.write(pin, false, function(err) {
       if(err) throw err;
       console.log(`Write to Pin ${pin}`);
     });
   };
-  gpio.write(pin, value, write)
-}
+  
 
 
 
@@ -61,7 +59,7 @@ wss.on('connection', (ws: WebSocket) => {
   ws.on('message', (message: string) => {
     console.log('recieved: %s', message);
     let messageJSON = JSON.parse(message); 
-    messageJSON.message === 'on' ? writeGpio(true) : writeGpio(false);
+    messageJSON.message === 'on' ? gpio.write(pin, true, write) : gpio.write(pin, false, write);;
     
     ws.send(message);
     // wss.clients
