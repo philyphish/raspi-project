@@ -26,17 +26,6 @@ app.use(express.static(clientPath));
 app.get('/*', (req, res) => 
 res.sendFile(indexFilePath, { root: './' },)
 );
-
-
-  
-  function readInput(err) {
-    if (err) throw err;
-    gpio.read(pin, function(err, value){
-      if(err) throw err;
-      console.log(`Pin ${pin} value is ${value}`); 
-      return value;   
-    });
-  }
   
   function write(err){
     if(err) throw err;
@@ -70,7 +59,15 @@ wss.on('connection', (ws: WebSocket) => {
       });
     });
     
-    
+  function readInput(err) {
+    if (err) throw err;
+    gpio.read(pin, function(err, value){
+      if(err) throw err;
+      console.log(`Pin ${pin} value is ${value}`); 
+      return value;
+    });
+  }
+      
 server.listen(port, () => {
     console.log('Listening on port ' + port);
   });
