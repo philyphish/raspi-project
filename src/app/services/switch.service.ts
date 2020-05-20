@@ -29,6 +29,7 @@ export class SwitchService {
     this.store.select('SendMessage')
       .subscribe(state => {
         console.log(`Connected: ${state.message}`);
+        
       });
 
     this.store.dispatch(new gpioActions.GetConnected('connect'));
