@@ -27,15 +27,15 @@ app.get('/*', (req, res) =>
 res.sendFile(indexFilePath, { root: './' },)
 );
 
-gpio.setup(pin, gpio.DIR_IN, readInput);
+//gpio.setup(pin, gpio.DIR_IN, readInput);
 
-function readInput(err) {
-  if (err) throw err;
-  gpio.read(pin, function(err, value){
-    if(err) throw err;
-    console.log(`Pin ${pin} value is ${value}`);
-  });
-}
+// function readInput(err) {
+//   if (err) throw err;
+//   gpio.read(pin, function(err, value){
+//     if(err) throw err;
+//     console.log(`Pin ${pin} value is ${value}`);
+//   });
+// }
   gpio.setup(pin, gpio.DIR_HIGH, write);
 
   function write(err){
@@ -50,7 +50,8 @@ const wss = new WebSocket.Server({ server: server, path: '/raspi/gpio' });
 wss.on('connection', (ws: WebSocket) => {
   console.log('Connected!');
 
-  let gpioState = gpio.read(pin, readInput);
+  // let gpioState = gpio.read(pin, readInput);
+  let gpioState = false;
 
   ws.send(`{"message":"State of GPIO "${pin} is ${gpioState}`);
 
