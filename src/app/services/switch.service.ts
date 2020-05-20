@@ -21,7 +21,6 @@ export class SwitchService {
 
     this.store.dispatch(new gpioActions.SendMessage(gpioSwitch));
 
-    console.log(`turn ${gpioSwitch} led!`);
     return gpioSwitch;
   }
 
