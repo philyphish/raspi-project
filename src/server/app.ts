@@ -49,11 +49,10 @@ res.sendFile(indexFilePath, { root: './' },)
 const wss = new WebSocket.Server({ server: server, path: '/raspi/gpio' });
 wss.on('connection', (ws: WebSocket) => {
   console.log('Connected!');
-  
-  // gpio.setup(pin, gpio.DIR_IN, readInput);
+  gpio.setup(pin, gpio.DIR_IN, readInput);
+  let gpioState = gpio.read(pin, readInput);
 
-  // let gpioState = gpio.read(pin, readInput);
-  ws.send(`{"message":"State of GPIO "${pin} is`);
+  ws.send(`{"message":"State of GPIO "${pin} is ${gpioState}`);
 
   ws.on('message', (message: string) => {
     gpio.setup(pin, gpio.DIR_HIGH, write);
