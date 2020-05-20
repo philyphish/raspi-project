@@ -36,7 +36,7 @@ res.sendFile(indexFilePath, { root: './' },)
 //     console.log(`Pin ${pin} value is ${value}`);
 //   });
 // }
-  gpio.setup(pin, gpio.DIR_HIGH, write);
+  gpio.setup(pin, gpio.DIR_OUT, write);
 
   function write(err){
     if(err) throw err;

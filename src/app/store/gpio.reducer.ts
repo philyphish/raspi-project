@@ -13,6 +13,8 @@ export function messageReducer(state = initialState, action: WebSocketAction.Web
     switch(action.type) {
         case WebSocketAction.GET_CONNECTED: 
             wsRaspi = webSocket(env.environment.wsServer);
+            
+            return {...state };
 
         case WebSocketAction.SEND_MESSAGE:
             wsRaspi.next({ message: action.payload });
