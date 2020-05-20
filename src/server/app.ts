@@ -27,7 +27,7 @@ app.get('/*', (req, res) =>
 res.sendFile(indexFilePath, { root: './' },)
 );
 
-gpio.setup(11, gpio.DIR_IN, readInput);
+gpio.setup(pin, gpio.DIR_IN, readInput);
 
 function readInput(err) {
   if (err) throw err;
@@ -36,6 +36,7 @@ function readInput(err) {
     console.log(`Pin ${pin} value is ${value}`);
   });
 }
+  gpio.setup(pin, gpio.DIR_HIGH, write);
 
   function write(err){
     if(err) throw err;
@@ -54,7 +55,6 @@ wss.on('connection', (ws: WebSocket) => {
   ws.send(`{"message":"State of GPIO "${pin} is ${gpioState}`);
 
   ws.on('message', (message: string) => {
-    gpio.setup(pin, gpio.DIR_HIGH, write);
     console.log('recieved: %s', message);
     let messageJSON = JSON.parse(message); 
     messageJSON.message === 'on' ? gpio.write(pin, true) : gpio.write(pin, false, write);;
