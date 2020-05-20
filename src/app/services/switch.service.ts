@@ -25,10 +25,10 @@ export class SwitchService {
   }
 
   public connectWs() {
-    this.store.select('SendMessage')
+    this.store.select('GetConnected')
       .subscribe(state => {
         console.log(`Connected: ${state.message}`);
-        
+        return state;
       });
 
     this.store.dispatch(new gpioActions.GetConnected('connect'));
