@@ -53,7 +53,7 @@ wss.on('connection', (ws: WebSocket) => {
   // let gpioState = gpio.read(pin, readInput);
   let gpioState = false;
 
-  ws.send(`{"message":"State of GPIO "${pin} is`);
+  ws.send(`{"message":"State of GPIO is"}`);
 
   ws.on('message', (message: string) => {
     console.log('recieved: %s', message);
