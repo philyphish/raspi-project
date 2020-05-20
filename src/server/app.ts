@@ -63,11 +63,10 @@ wss.on('connection', (ws: WebSocket) => {
     if (err) throw err;
     gpio.read(pin, function(err, value){
       if(err) throw err;
-      console.log(`Pin ${pin} value is ${value}`); 
-      return value;
+      console.log(`Pin ${pin} value is ${value}`);
     });
   }
-      
+
 server.listen(port, () => {
     console.log('Listening on port ' + port);
   });
