@@ -39,6 +39,14 @@ const wss = new WebSocket.Server({ server: server, path: '/raspi/gpio' });
 wss.on('connection', (ws: WebSocket) => {
   console.log('Connected!');
   gpio.setup(pin, gpio.DIR_IN, readInput);
+
+  function readInput(err) {
+    if (err) throw err;
+    gpio.read(pin, function(err, value){
+      if(err) throw err;
+      console.log(`Pin ${pin} value is ${value}`);
+    });
+  }
   let gpioState = gpio.read(pin, readInput);
 
   ws.send(`{"message":"State of GPIO "${pin} is ${gpioState}`);
@@ -58,14 +66,6 @@ wss.on('connection', (ws: WebSocket) => {
         // }); 
       });
     });
-    
-  function readInput(err) {
-    if (err) throw err;
-    gpio.read(pin, function(err, value){
-      if(err) throw err;
-      console.log(`Pin ${pin} value is ${value}`);
-    });
-  }
 
 server.listen(port, () => {
     console.log('Listening on port ' + port);
