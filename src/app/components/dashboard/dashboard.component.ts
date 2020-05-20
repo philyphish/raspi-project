@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     console.log(window.location.href);
-    
+    this.switchService.connectWs();
   }
 
   public ledSwitch() {

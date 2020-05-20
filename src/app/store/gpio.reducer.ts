@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import * as SendMessage from './gpio.actions';
+import * as WebSocketAction from './gpio.actions';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import * as env from '../../environments/environment';
 
@@ -8,11 +8,13 @@ const initialState = {
 };
 let wsRaspi: WebSocketSubject<any>;
 
-wsRaspi = webSocket(env.environment.wsServer);
-export function messageReducer(state = initialState, action: SendMessage.SendMessage) {
+export function messageReducer(state = initialState, action: WebSocketAction.WebSocketActions) {
 
     switch(action.type) {
-        case SendMessage.SEND_MESSAGE:
+        case WebSocketAction.GET_CONNECTED: 
+            wsRaspi = webSocket(env.environment.wsServer);
+
+        case WebSocketAction.SEND_MESSAGE:
             wsRaspi.next({ message: action.payload });
             wsRaspi.asObservable().subscribe(res => console.log('From Store: ', res)
             );

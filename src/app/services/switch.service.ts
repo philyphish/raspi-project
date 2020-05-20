@@ -25,4 +25,13 @@ export class SwitchService {
     return gpioSwitch;
   }
 
+  public connectWs() {
+    this.store.select('SendMessage')
+      .subscribe(state => {
+        console.log(`Connected: ${state}`);
+      });
+
+    this.store.dispatch(new gpioActions.GetConnected('connect your mom'));
+  }
+
 }
